@@ -32,3 +32,9 @@ npx hardhat run scripts/deploy.js
 2. Now App.js file will read metamask injected  ethereum object into window
 3. ``eth_accounts`` will retrun all the accounts within a wallet, now out reactjs app should be allowed to use that account form wallet.
 4. But to connect to metamask and ask for permission form metamask one need to use ``eth_requestAccounts`` 
+
+# Deployment of application on git-hub pages
+1. Add below lines in package.json file 
+        1.a  "homepage": "https://ruksad.github.io/Wave-portal"
+        1.b ``"predeploy": "npm run build",deploy": "gh-pages -d build" `` in package.json under scripts 
+2. Do ``npm install --save gh-pages`` and run ``npm run deploy`` this command will create gh-pages in your git hub repo. Now go to settings->Pages-> you willl be able to see deployed website on github
