@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Wave-portal/static/css/main.768d1393.css",
-    "main.js": "/Wave-portal/static/js/main.cee47d2c.js",
+    "main.js": "/Wave-portal/static/js/main.70e18faf.js",
     "index.html": "/Wave-portal/index.html",
     "main.768d1393.css.map": "/Wave-portal/static/css/main.768d1393.css.map",
-    "main.cee47d2c.js.map": "/Wave-portal/static/js/main.cee47d2c.js.map"
+    "main.70e18faf.js.map": "/Wave-portal/static/js/main.70e18faf.js.map"
   },
   "entrypoints": [
     "static/css/main.768d1393.css",
-    "static/js/main.cee47d2c.js"
+    "static/js/main.70e18faf.js"
   ]
 }
