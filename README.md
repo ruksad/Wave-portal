@@ -30,4 +30,5 @@ npx hardhat run scripts/deploy.js
 # To make reactjs app communicate with deployed contract
 1. Before deploying contract one needs to have metamask extension installed with wallet created
 2. Now App.js file will read metamask injected  ethereum object into window
-3. ``eth_accounts`` will retrun all the accounts within a wallet, now out reactjs app should be allowed to use that account form wallet
+3. ``eth_accounts`` will retrun all the accounts within a wallet, now out reactjs app should be allowed to use that account form wallet.
+4. But to connect to metamask and ask for permission form metamask one need to use ``eth_requestAccounts`` 
