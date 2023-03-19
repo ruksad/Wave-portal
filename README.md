@@ -12,5 +12,8 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
-1. File scripts/run.js is run by hardhat to create temporary etherium blockchain network on your local and deploys it.
-2. ``npx hardhat run scripts/run.js``
+1. To create new hardhat project use this ``npx hardhat``. Which creates file ``hardhat.config.js``
+2. File scripts/run.js is run by hardhat to create temporary etherium blockchain network on your local and deploys it.``npx hardhat run scripts/run.js``
+3. API ``hre.ethers.getSigners();`` returns an array in which 0th is the owner.
+4. To run etherium node from hardhat use command ``npx hardhat node`` it gives 20 wallets with 10000 eth each 
+5. Deploy you contract on this localhost node using command ``npx hardhat run scripts/deploy.js --network localhost``
