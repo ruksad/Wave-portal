@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import "./App.css";
+import abi from "./utils/WavePortal.json";
 /**
  *
  * @returns metamask plugin injects ethereum object into window
@@ -14,18 +15,17 @@ const getEthereumObject = () => window.ethereum;
 const findMetaMaskAccount = async () => {
   try {
     const ethereum = getEthereumObject();
-    if(!ethereum){
+    if (!ethereum) {
       console.log("Make sure you have Metamask installed");
       return null;
     }
 
-    const accounts=   await ethereum.request({method:"eth_accounts"});
-    if(accounts.length!==0){
-      const account= accounts[0];
+    const accounts = await ethereum.request({ method: "eth_accounts" });
+    if (accounts.length !== 0) {
+      const account = accounts[0];
       console.log("Authorised account found", account);
       return account;
-
-    }else{
+    } else {
       console.log("No authorised account found ");
       return null;
     }
@@ -36,37 +36,58 @@ const findMetaMaskAccount = async () => {
 };
 
 export default function App() {
-
-  const [currentAccount, setCurrentAccount]=useState("");
-
-
+  const [currentAccount, setCurrentAccount] = useState("");
+  const contractAddress= "0xB31b2E67BF456fD78C72558a12D86D4caa5ed729";
+  const contractABI= abi.abi
   /*
    * This runs our function when the page loads.
    * More technically, when the App component "mounts".
    */
   useEffect(() => {
-   findMetaMaskAccount().then((account)=>{
-      if(account){
+    findMetaMaskAccount().then((account) => {
+      if (account) {
         setCurrentAccount(account);
       }
-   });
+    });
   }, []);
 
-  const wave = () => {};
-  const connectWallet= async()=>{
-    try{
-      const ethereum= getEthereumObject();
-      if(!ethereum){
+  const connectWallet = async () => {
+    try {
+      const ethereum = getEthereumObject();
+      if (!ethereum) {
         alert("Get Metamask");
         return;
       }
-      const accounts= await ethereum.request({method:"eth_requestAccounts"});
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0]);
-    }catch(error){
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  const wave = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+        let count = await wavePortalContract.getTotalWaves();
+        console.log("Reterieved total wave counts", count.toNumber());
+      } else {
+        console.log("Ethereum object does not exist");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mainContainer">
@@ -86,11 +107,12 @@ export default function App() {
          * If there is no currentAccount render this button
          */}
 
-        { !currentAccount &&(
-          <button className="waveButton" onClick={connectWallet}> Connect wallet</button>
-        )
-
-        }
+        {!currentAccount && (
+          <button className="waveButton" onClick={connectWallet}>
+            {" "}
+            Connect wallet
+          </button>
+        )}
       </div>
     </div>
   );
