@@ -36,9 +36,14 @@ const findMetaMaskAccount = async () => {
 };
 
 export default function App() {
+
+  const[loading,setLoading]=useState(false);
+
+  // for setting account from metamask
   const [currentAccount, setCurrentAccount] = useState("");
   const contractAddress= "0xB31b2E67BF456fD78C72558a12D86D4caa5ed729";
   const contractABI= abi.abi
+  let totalWaveCount;
   /*
    * This runs our function when the page loads.
    * More technically, when the App component "mounts".
@@ -79,28 +84,35 @@ export default function App() {
           contractABI,
           signer
         );
-        let count = await wavePortalContract.getTotalWaves();
-        console.log("Reterieved total wave counts", count.toNumber());
+        totalWaveCount = await wavePortalContract.getTotalWaves();
+        console.log("Reterieved total wave counts", totalWaveCount.toNumber());
 
+        setLoading(true);
         const waveTxn=await wavePortalContract.wave();
         console.log("Mining... ", waveTxn.hash);
 
         await waveTxn.wait()
         console.log("Mined...",waveTxn.hash);
+        setLoading(false);
 
-        const waves=await wavePortalContract.getTotalWaves();
-        console.log("Reterieved total wave count...", waves.toNumber());
+        totalWaveCount=await wavePortalContract.getTotalWaves();
+        console.log("Reterieved total wave count...", totalWaveCount.toNumber());
       } else {
         console.log("Ethereum object does not exist");
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
   return (
     <div className="mainContainer">
-      <div className="dataContainer">
+    {loading?(<div className="loader-container">
+      <div className="spinner"></div>
+    </div>):
+      (<div className="dataContainer">
         <div className="header">👋 Hey there!</div>
 
         <div className="bio">
@@ -111,6 +123,7 @@ export default function App() {
         <button className="waveButton" onClick={wave}>
           Do tada at me
         </button>
+        {totalWaveCount && <div>Total wave till now ${totalWaveCount.toNumber}</div>}
 
         {/*
          * If there is no currentAccount render this button
@@ -122,7 +135,7 @@ export default function App() {
             Connect wallet
           </button>
         )}
-      </div>
+      </div>)}
     </div>
   );
-}
+};
