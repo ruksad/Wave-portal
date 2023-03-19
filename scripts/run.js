@@ -27,5 +27,7 @@ const runMain = async () => {
     process.exit(1);
   }
 };
-
+/**
+ * Running on temporary local ethereum blockchain 
+ */
 runMain();
