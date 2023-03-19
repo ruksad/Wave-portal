@@ -17,3 +17,8 @@ npx hardhat run scripts/deploy.js
 3. API ``hre.ethers.getSigners();`` returns an array in which 0th is the owner.
 4. To run etherium node from hardhat use command ``npx hardhat node`` it gives 20 wallets with 10000 eth each 
 5. Deploy you contract on this localhost node using command ``npx hardhat run scripts/deploy.js --network localhost``
+
+Now to deploy this contract on testnet blockchain we need to
+1. Get Api key for a testnet from quicknote
+2. we do not do deployment on hardhat local node 
+3. Quicknote helps us to deploy contract on main blockchain or test netwok
