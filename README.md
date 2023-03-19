@@ -25,7 +25,7 @@ npx hardhat run scripts/deploy.js
 3. Quicknote helps us to deploy contract on main blockchain or test netwok
 4. use dependency ``npm install --save dotenv`` to save your private key and quicknote qoerli secret url into .env file and add it to .gitignore
 5. deploy the contract on goerli test network using command``npx hardhat run scripts/deploy.js --network goerli``
-6. Deployed contract is on https://goerli.etherscan.io/address/0xB31b2E67BF456fD78C72558a12D86D4caa5ed729
+6. Deployed contract is on https://goerli.etherscan.io/address/0xa7FD41dED077bD03EEaFe36Deb7f2ECE090bB180
 
 # To make reactjs app communicate with deployed contract
 1. Before deploying contract one needs to have metamask extension installed with wallet created
