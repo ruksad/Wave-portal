@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Wave-portal/static/css/main.59363bcc.css",
+    "main.js": "/Wave-portal/static/js/main.066861b6.js",
+    "index.html": "/Wave-portal/index.html",
+    "main.59363bcc.css.map": "/Wave-portal/static/css/main.59363bcc.css.map",
+    "main.066861b6.js.map": "/Wave-portal/static/js/main.066861b6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.59363bcc.css",
+    "static/js/main.066861b6.js"
+  ]
+}
