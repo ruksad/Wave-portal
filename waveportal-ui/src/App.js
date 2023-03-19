@@ -121,7 +121,7 @@ export default function App() {
         </div>
 
         <button className="waveButton" onClick={wave}>
-          Do tada at me
+          Do tada at me!!!
         </button>
         {totalWaveCount && <div>Total wave till now ${totalWaveCount.toNumber}</div>}
 
