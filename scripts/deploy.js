@@ -37,10 +37,15 @@ const main = async () => {
   console.log("Deploying contract with account :", owner.address);
   console.log("Account balance: ", accountBalance);
 
+  try{
   const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-  const waveContract = await waveContractFactory.deploy();
-  await waveContract.deployed();
+  const waveContract = await waveContractFactory.deploy({value:hre.ethers.utils.parseEther("0.001"),});
   console.log("Waveportal address: ", waveContract.address);
+  await waveContract.deployed();
+  }catch(error){
+    console.log("Error: ", error);
+  }
+  
 };
 
 const runMain = async () => {
