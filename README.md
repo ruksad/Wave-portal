@@ -26,6 +26,7 @@ npx hardhat run scripts/deploy.js
 4. use dependency ``npm install --save dotenv`` to save your private key and quicknote qoerli secret url into .env file and add it to .gitignore
 5. deploy the contract on goerli test network using command``npx hardhat run scripts/deploy.js --network goerli``
 6. Deployed contract is on https://goerli.etherscan.io/address/0xa7FD41dED077bD03EEaFe36Deb7f2ECE090bB180
+7. You can get goeli from here https://goerlifaucet.com/
 
 # To make reactjs app communicate with deployed contract
 1. Before deploying contract one needs to have metamask extension installed with wallet created
