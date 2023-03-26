@@ -44,7 +44,7 @@ export default function App() {
 
   // for setting account from metamask
   const [currentAccount, setCurrentAccount] = useState("");
-  const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
   const contractABI = abi.abi;
   let totalWaveCount;
 
@@ -60,6 +60,8 @@ export default function App() {
           signer
         );
 
+        const code = await provider.getCode(contractAddress)
+        console.log("Contract code ", code);
         /*
          * Call the getAllWaves method from your Smart Contract
          */
@@ -69,18 +71,27 @@ export default function App() {
          * We only need address, timestamp, and message in our UI so let's
          * pick those out
          */
-        let wavesCleaned = [];
-        waves.forEach((wave) => {
-          wavesCleaned.push({
+        l
+        const wavesCleaned = waves.map(wave => {
+          return {
             address: wave.waver,
             timestamp: new Date(wave.timestamp * 1000),
             message: wave.message,
-          });
+          };
         });
-        /*
-         * Store our data in React State
-         */
+  
         setAllWaves(wavesCleaned);
+
+
+        wavePortalContract.on("NewWave", (from, timestamp, message) => {
+          console.log("NewWave", from, timestamp, message);
+
+          setAllWaves(prevState => [...prevState, {
+            address: from,
+            timestamp: new Date(timestamp * 1000),
+            message: message
+          }]);
+        });
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -133,7 +144,7 @@ export default function App() {
         console.log("Reterieved total wave counts", totalWaveCount.toNumber());
           let message= prompt("Please enter your message","Hello there")
         setLoading(true);
-        const waveTxn = await wavePortalContract.wave(message);
+        const waveTxn = await wavePortalContract.wave(message,{gasLimit:300000});
         console.log("Mining... ", waveTxn.hash);
 
         await waveTxn.wait();
